@@ -131,10 +131,10 @@ function CheckOut() {
                             <div className="flex justify-between mt-8">
                                 <div className="flex items-center gap-2">
                                     {/* <IoIosArrowBack /> */}
-                                    <button className="flex bg-blue-600 text-white px-6 py-2 rounded"><IoIosArrowBack className='mr-4' size={20}/>Back to cart</button>
+                                    <button className="flex bg-primarycolororg text-white px-6 py-2 rounded"><IoIosArrowBack className='mr-4' size={20}/>Back to cart</button>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <button className="flex bg-blue-600  text-white px-4 py-2 rounded">Proceed to shipping <IoIosArrowForward className='ml-4' size={20}/></button>
+                                    <button className="flex bg-primarycolororg  text-white px-4 py-2 rounded">Proceed to shipping <IoIosArrowForward className='ml-4' size={20}/></button>
                                     {/* <IoIosArrowForward /> */}
                                 </div>
                             </div>
@@ -166,7 +166,6 @@ function CheckOut() {
                                     <p className="text-gray-600">$503</p>
                                 </div>
                             </div>
-
                             <div className="mt-4">
                                 <span className="flex justify-between mb-2">
                                     <p>Subtotal</p>
@@ -191,7 +190,7 @@ function CheckOut() {
                                 </span>
                             </div>
                             <div className="mt-8">
-                                <button className="text-white bg-blue-600 px-4 py-2 w-full rounded flex items-center justify-between">
+                                <button className="text-white bg-primarycolororg px-4 py-2 w-full rounded flex items-center justify-between">
                                     <span>Place an order</span>
                                     <FaArrowRight />
                                 </button>

@@ -77,7 +77,7 @@ function Signin() {
                         id="email"
                         type="email"
                         placeholder="Enter your email"
-                        className="w-full border rounded-md p-2 pl-10 mt-1 focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-md p-2 pl-10 mt-1 focus:ring-2 focus:ring-primarycolororg"
                     />
                 </div>
 
@@ -88,7 +88,7 @@ function Signin() {
                         id="password"
                         type="password"
                         placeholder="Enter your password"
-                        className="w-full border rounded-md p-2 pl-10 mt-1 focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-md p-2 pl-10 mt-1 focus:ring-2 focus:ring-primarycolororg"
                     />
                 </div>
 
@@ -98,13 +98,13 @@ function Signin() {
                         <input type="checkbox" />
                         <p>Remember me?</p>
                     </label>
-                    <a href="#" className="text-blue-500 text-sm hover:underline">
+                    <a href="#" className="text-primarycolororg text-sm hover:underline">
                         Forgot Password?
                     </a>
                 </div>
 
                 {/* Sign In Button */}
-                <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
+                <button className="w-full bg-primarycolororg text-white py-2 rounded-md transition">
                     Sign In
                 </button>
 

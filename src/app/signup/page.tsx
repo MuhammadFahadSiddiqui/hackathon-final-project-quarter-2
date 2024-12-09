@@ -5,6 +5,7 @@ import { FaApple } from 'react-icons/fa'
 import { AiOutlineMail } from 'react-icons/ai'
 import { CiLock } from 'react-icons/ci'
 import { LuUserRound } from 'react-icons/lu'
+import Link from 'next/link'
 
 function signup() {
     return (
@@ -128,10 +129,12 @@ function signup() {
                 </div>
 
                 {/* Google Sign In */}
+                <Link href="/signin">
                 <div className="flex items-center border border-gray-300 p-2 justify-center mb-4 space-x-2">
                     <FcGoogle className="text-xl" />
                     <p className="text-sm">Sign in with Google</p>
                 </div>
+                </Link>
 
                 {/* Apple Sign In */}
                 <div className="flex items-center border border-gray-300 p-2 justify-center space-x-2">
@@ -139,9 +142,6 @@ function signup() {
                     <p className="text-sm">Sign in with Apple</p>
                 </div>
             </div>
-
-
-
         </div>
     )
 }
