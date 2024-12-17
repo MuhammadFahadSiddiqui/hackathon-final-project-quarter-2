@@ -12,15 +12,29 @@ export default function Navbar() {
         </p>
         <div className="flex items-center justify-between w-[1320px] h-[87px]">
           <div className="flex text-[16px] gap-5">
-            <Link href='/'>
-            <p className="text-ffffff hover:cursor-pointer">Home</p>
+            <Link href="/">
+              <p className="text-ffffff hover:cursor-pointer">Home</p>
             </Link>
-           <Link href='/ourmenu'> <p className="text-ffffff hover:cursor-pointer">Menu</p></Link>
+            <Link href="/ourmenu">
+              {" "}
+              <p className="text-ffffff hover:cursor-pointer">Menu</p>
+            </Link>
             {/* <Link href='/'><p className="text-ffffff hover:cursor-pointer">Blog</p></Link> */}
-            <Link href='/menu'><p className="text-ffffff hover:cursor-pointer">Pages</p></Link>
-            <Link href='/about'><p className="text-ffffff hover:cursor-pointer">About</p></Link>
-            <Link href='/shop'><p className="text-ffffff hover:cursor-pointer">Shop</p></Link>
-            <Link href='/contact'><p className="text-ffffff hover:cursor-pointer">Contact</p></Link>
+            <Link href="/checkout">
+              <p className="text-ffffff hover:cursor-pointer">Pages</p>
+            </Link>
+            <Link href="/ourchef">
+              <p className="text-ffffff hover:cursor-pointer">Chef</p>
+            </Link>
+            <Link href="/ourshop">
+              <p className="text-ffffff hover:cursor-pointer">Shop</p>
+            </Link>
+            <Link href="/contact">
+              <p className="text-ffffff hover:cursor-pointer">Contact</p>
+            </Link>
+            <Link href="/signup">
+              <p className="text-ffffff hover:cursor-pointer">Sign Up</p>
+            </Link>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex justify-center items-center gap-8 h-[54px] w-[310px] border rounded-full border-primarycolororg">

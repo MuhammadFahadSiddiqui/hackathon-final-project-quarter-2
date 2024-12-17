@@ -116,10 +116,17 @@ function signup() {
                     </a>
                 </div>
 
-                {/* Sign In Button */}
+                {/* Sign Un Button */}
                 <button className="w-full bg-primarycolororg text-white py-2 rounded-md hover:bg-blue-600 transition">
                     Sign Up
                 </button>
+
+                {/* Sign In Button */}
+                <Link href="/signin">
+                <button className="w-full text-primarycolororg bg-secondarycolorwhite border border-gray-300 py-2 rounded-md hover:bg-blue-600 transition mt-3">
+                    Sign In
+                </button>
+                </Link>
 
                 {/* Divider */}
                 <div className="flex items-center justify-between my-6">

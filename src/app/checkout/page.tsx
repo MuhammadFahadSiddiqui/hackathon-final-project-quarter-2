@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FaArrowRight } from 'react-icons/fa'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 
@@ -12,15 +13,30 @@ function CheckOut() {
                     <p className="text-[32px] font-bold">
                         Food<span className="text-primarycolororg cursor-pointer">truck</span>
                     </p>
-                    <div className="flex text-[16px] gap-5 cursor-pointer">
-                        <p className="text-primarycolororg">Home</p>
-                        <p className="text-ffffff">Menu</p>
-                        <p className="text-ffffff">Blog</p>
-                        <p className="text-ffffff">Pages</p>
-                        <p className="text-ffffff">About</p>
-                        <p className="text-ffffff">Shop</p>
-                        <p className="text-ffffff">Contact</p>
-                    </div>
+                    <div className="flex text-[16px] gap-5">
+            <Link href="/">
+              <p className="text-ffffff hover:cursor-pointer">Home</p>
+            </Link>
+            <Link href="/ourmenu">
+              <p className="text-ffffff hover:cursor-pointer">Menu</p>
+            </Link>
+            {/* <Link href='/'><p className="text-ffffff hover:cursor-pointer">Blog</p></Link> */}
+            <Link href="/checkout">
+              <p className="text-ffffff hover:cursor-pointer">Pages</p>
+            </Link>
+            <Link href="/ourchef">
+              <p className="text-ffffff hover:cursor-pointer">Chef</p>
+            </Link>
+            <Link href="/ourshop">
+              <p className="text-ffffff hover:cursor-pointer">Shop</p>
+            </Link>
+            <Link href="/contact">
+              <p className="text-ffffff hover:cursor-pointer">Contact</p>
+            </Link>
+            <Link href="/signup">
+              <p className="text-ffffff hover:cursor-pointer">Sign Up</p>
+            </Link>
+          </div>
                     <div className="flex gap-[24px] cursor-pointer">
                         <Image
                             alt="glss"
