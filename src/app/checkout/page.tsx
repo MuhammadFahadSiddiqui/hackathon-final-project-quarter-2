@@ -8,7 +8,7 @@ function CheckOut() {
     return (
         <div>
             {/* navbar  */}
-            <div>
+            <div className='mb-20'>
                 <div className="flex items-center h-[90px] bg-ododod text-ffffff gap-80 justify-center">
                     <p className="text-[32px] font-bold">
                         Food<span className="text-primarycolororg cursor-pointer">truck</span>

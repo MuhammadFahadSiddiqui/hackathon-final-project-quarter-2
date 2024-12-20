@@ -86,7 +86,7 @@ function Signin() {
 
       {/* sign up 404 */}
 
-      <div className="mx-auto mt-60 h-[564px] w-[424px] p-6 bg-white shadow-lg rounded-md">
+      <div className="mx-auto mt-60 h-[564px] w-[424px] p-6 mb-10 bg-white shadow-lg rounded-md">
         <h3 className="text-[20px] font-semibold text-center mb-6">Sign In</h3>
 
         {/* Email Input */}

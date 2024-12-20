@@ -9,7 +9,7 @@ import Link from "next/link";
 
 function signup() {
   return (
-    <div>
+    <div className="mb-40">
       {/* navbar  */}
       <div>
         <div className="flex items-center h-[90px] bg-ododod text-ffffff gap-80 justify-center">
