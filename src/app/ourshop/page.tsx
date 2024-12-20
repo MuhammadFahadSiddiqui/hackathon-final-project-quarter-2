@@ -40,7 +40,7 @@ const images = [
 
 export default function Page() {
   return (
-    <div>
+    <div className="flex flex-col justify-center w-[1920px]">
       <div>
         <div className="flex items-center h-[90px] bg-ododod text-ffffff gap-80 justify-center">
           <p className="text-[32px] font-bold">
@@ -98,9 +98,9 @@ export default function Page() {
           width={1920}
           height={410}
         />
-        <div className="-mt-72">
+        <div className="-mt-72 ">
           <p className="flex justify-center text-ffffff text-[65px] font-bold">
-            Sing in
+            Our Shop
           </p>
           <div className="flex justify-center mt-3 text-[20px]">
             <p className="text-ffffff">Home</p>
@@ -110,11 +110,11 @@ export default function Page() {
               width={16}
               height={16}
             />
-            <p className="text-primarycolororg">Sign in </p>
+            <p className="text-primarycolororg">shop </p>
           </div>
         </div>
       </div>
-      <div className="flex justify-between mh-[1923px] w-[1320px]">
+      <div className="flex justify-between mt-60 mh-[1923px] w-[1320px]">
         <div>
           {/* Dropdown Section */}
           <div className="flex gap-10 mb-6">
