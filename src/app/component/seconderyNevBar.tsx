@@ -1,77 +1,104 @@
-import React from "react";
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-export default function SeconderyNevBar() {
+import { IoBagHandleOutline } from "react-icons/io5";
+import { AiOutlineUser } from "react-icons/ai";
+import { GoHeart } from "react-icons/go";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+const SeconderyNavBar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div>
-      <div className="flex items-center h-[90px] bg-ododod text-ffffff gap-80 justify-center">
+      {/* Desktop Navbar */}
+      <div className="hidden lg:flex lg:px-20 items-center py-6 h-[90px] bg-ododod text-white justify-between">
         <p className="text-[32px] font-bold">
           Food<span className="text-primarycolororg cursor-pointer">truck</span>
         </p>
-        <div className="flex text-[16px] gap-5">
+        <ul className="flex text-[16px] gap-6">
+          <Link href="/">
+            <li className="hover:text-primarycolororg cursor-pointer">Home</li>
+          </Link>
+          <Link href="/ourmenu">
+            <li className="hover:text-primarycolororg cursor-pointer">Menu</li>
+          </Link>
+          <Link href="/ourchef">
+            <li className="hover:text-primarycolororg cursor-pointer">Chef</li>
+          </Link>
+          <Link href="/ourshop">
+            <li className="hover:text-primarycolororg cursor-pointer">Shop</li>
+          </Link>
+          <Link href="/contact">
+            <li className="hover:text-primarycolororg cursor-pointer">
+              Contact
+            </li>
+          </Link>
+          <Link href="/about">
+            <li className="hover:text-primarycolororg cursor-pointer">About</li>
+          </Link>
+        </ul>
+        <div className="flex gap-4 text-white text-2xl">
+          <GoHeart className="hover:text-primarycolororg cursor-pointer" />
+          <IoBagHandleOutline className="hover:text-primarycolororg cursor-pointer" />
+          <AiOutlineUser className="hover:text-primarycolororg cursor-pointer" />
+        </div>
+      </div>
+
+      {/* Mobile Navbar */}
+      <div className="lg:hidden bg-ododod text-white py-4 px-5 flex justify-between items-center">
+        <GiHamburgerMenu
+          size={30}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="cursor-pointer"
+        />
+        <div className="flex gap-4 text-white text-2xl mt-4">
+          <GoHeart className="hover:text-primarycolororg cursor-pointer" />
+          <IoBagHandleOutline className="hover:text-primarycolororg cursor-pointer" />
+          <AiOutlineUser className="hover:text-primarycolororg cursor-pointer" />
+        </div>
+      </div>
+
+      {/* Dropdown Menu for Mobile */}
+      {isMenuOpen && (
+        <div className="lg:hidden bg-ododod text-white py-4 px-5">
+          <ul className="flex flex-col gap-4">
             <Link href="/">
-              <p className="text-ffffff hover:cursor-pointer">Home</p>
+              <li className="hover:text-primarycolororg cursor-pointer">
+                Home
+              </li>
             </Link>
             <Link href="/ourmenu">
-              <p className="text-ffffff hover:cursor-pointer">Menu</p>
-            </Link>
-            {/* <Link href='/'><p className="text-ffffff hover:cursor-pointer">Blog</p></Link> */}
-            <Link href="/checkout">
-              <p className="text-ffffff hover:cursor-pointer">Pages</p>
+              <li className="hover:text-primarycolororg cursor-pointer">
+                Menu
+              </li>
             </Link>
             <Link href="/ourchef">
-              <p className="text-ffffff hover:cursor-pointer">Chef</p>
+              <li className="hover:text-primarycolororg cursor-pointer">
+                Chef
+              </li>
             </Link>
             <Link href="/ourshop">
-              <p className="text-ffffff hover:cursor-pointer">Shop</p>
+              <li className="hover:text-primarycolororg cursor-pointer">
+                Shop
+              </li>
             </Link>
             <Link href="/contact">
-              <p className="text-ffffff hover:cursor-pointer">Contact</p>
+              <li className="hover:text-primarycolororg cursor-pointer">
+                Contact
+              </li>
             </Link>
-            <Link href="/signup">
-              <p className="text-ffffff hover:cursor-pointer">Sign Up</p>
+            <Link href="/about">
+              <li className="hover:text-primarycolororg cursor-pointer">
+                About
+              </li>
             </Link>
-          </div>
-        <div className="flex gap-[24px] cursor-pointer">
-          <Image
-            alt="glss"
-            src="/images/SendonderyNevBar/MagnifyingGlass.png"
-            width={24}
-            height={24}
-          />
-          <Image
-            alt="User"
-            src="/images/SendonderyNevBar/User.png"
-            width={24}
-            height={24}
-          />
-          <Image
-            alt="Tote"
-            src="/images/SendonderyNevBar/Tote.png"
-            width={24}
-            height={24}
-          />
+          </ul>
         </div>
-      </div>
-      <Image
-        alt="Veg"
-        src="/images/SendonderyNevBar/SendonderyNevBar.png"
-        width={1920}
-        height={410}
-      />
-      <div className="-mt-72">
-        <p className="flex justify-center text-ffffff text-[65px] font-bold">Our Menu</p>
-        <div className="flex justify-center mt-3 text-[20px]">
-          <p className="text-ffffff">Home</p>
-          <Image
-            alt="CaretRight"
-            src="/images/SendonderyNevBar/CaretRight.png"
-            width={16}
-            height={16}
-          />
-          <p className="text-primarycolororg">Menu</p>
-        </div>
-      </div>
+      )}
     </div>
   );
-}
+};
+
+export default SeconderyNavBar;

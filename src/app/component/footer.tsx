@@ -3,20 +3,30 @@
 import React from "react";
 import Image from "next/image";
 import { PiClockClockwiseBold } from "react-icons/pi";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPinterest } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaPinterest,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer className="bg-black text-secondarycolorwhite mx-auto">
       {/* Main Section */}
-      <div className="lg:ml-40 flex flex-col lg:w-[1920px] md:flex-row justify-center mx-auto items-center bg-black px-3 md:px-[135px] py-8">
-        <div className="w-[1169px] mx-auto">
-          <h2 className="text-[20px] md:text-[32px] font-semibold">
-            <span className="text-primarycolororg">St</span>ill Need Our Support
-          </h2>
-          <p className="text-[10px] md:text-[16px] font-normal mt-4">
-            Don&#39;t wait; make a smart & logical quote here. It&#39;s pretty easy.
-          </p>
+      <div className="flex justify-center items-center bg-black py-8">
+        <div className="flex w-10/12">
+          <div className="w-10/12 mx-auto">
+            <h2 className="text-[20px] md:text-[32px] font-semibold">
+              <span className="text-primarycolororg">St</span>ill Need Our
+              Support
+            </h2>
+            <p className="text-[10px] md:text-[16px] font-normal mt-4">
+              Don&#39;t wait; make a smart & logical quote here. It&#39;s pretty
+              easy.
+            </p>
+          </div>
         </div>
 
         <div className="flex md:mt-0 mt-4 justify-center md:justify-start w-full">
@@ -38,17 +48,25 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {/* About Us */}
           <div className="text-center md:text-left">
-            <h2 className="mb-6 text-[24px] font-semibold uppercase">About Us</h2>
+            <h2 className="mb-6 text-[24px] font-semibold uppercase">
+              About Us
+            </h2>
             <p className="text-[#FFFFFF] text-[16px] font-normal mb-6 hover:underline">
-              Corporate clients and leisure travelers rely on Groundlink for dependable, safe, and professional chauffeured car service in major cities worldwide.
+              Corporate clients and leisure travelers rely on Groundlink for
+              dependable, safe, and professional chauffeured car service in
+              major cities worldwide.
             </p>
             <div className="flex justify-center gap-4">
               <div className="bg-primarycolororg flex justify-center -ml-24 items-center w-[72px] h-[72px]">
                 <PiClockClockwiseBold className="text-secondarycolorwhite text-[40px]" />
               </div>
               <div>
-                <h3 className="text-[16px] text-[#FFFFFF] font-normal">Opening Hours</h3>
-                <p className="text-[10px] text-[#FFFFFF]">Mon - Sat (8:00 - 18:00)</p>
+                <h3 className="text-[16px] text-[#FFFFFF] font-normal">
+                  Opening Hours
+                </h3>
+                <p className="text-[10px] text-[#FFFFFF]">
+                  Mon - Sat (8:00 - 18:00)
+                </p>
                 <p className="text-[10px] text-[#FFFFFF]">Sunday - Closed</p>
               </div>
             </div>
@@ -56,27 +74,15 @@ const Footer = () => {
 
           {/* Useful Links */}
           <div className="text-center md:text-left">
-            <h2 className="mb-6 text-[24px] font-semibold uppercase">Useful Links</h2>
+            <h2 className="mb-6 text-[24px] font-semibold uppercase">
+              Useful Links
+            </h2>
             <ul className="text-gray-500 font-medium">
-              {["About", "News", "Partner", "Team", "Menu", "Contact"].map((link) => (
-                <li key={link} className="mb-4">
-                  <a href="#" className="hover:underline">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Help */}
-          <div className="text-center md:text-left">
-            <h2 className="mb-6 text-[24px] font-semibold uppercase">Help?</h2>
-            <ul className="text-gray-500 font-medium">
-              {["FAQ", "Terms & Conditions", "Reporting", "Documentation", "Support Policy", "Privacy"].map(
-                (help) => (
-                  <li key={help} className="mb-4">
+              {["About", "News", "Partner", "Team", "Menu", "Contact"].map(
+                (link) => (
+                  <li key={link} className="mb-4">
                     <a href="#" className="hover:underline">
-                      {help}
+                      {link}
                     </a>
                   </li>
                 )
@@ -84,11 +90,37 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Help */}
+          <div className="text-center md:text-left">
+            <h2 className="mb-6 text-[24px] font-semibold uppercase">Help?</h2>
+            <ul className="text-gray-500 font-medium">
+              {[
+                "FAQ",
+                "Terms & Conditions",
+                "Reporting",
+                "Documentation",
+                "Support Policy",
+                "Privacy",
+              ].map((help) => (
+                <li key={help} className="mb-4">
+                  <a href="#" className="hover:underline">
+                    {help}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Recent Posts */}
           <div className="text-center md:text-left flex flex-col">
-            <h2 className="mb-6 text-[24px] font-semibold uppercase">Recent Posts</h2>
+            <h2 className="mb-6 text-[24px] font-semibold uppercase">
+              Recent Posts
+            </h2>
             {[...Array(3)].map((_, index) => (
-              <div key={index} className={`flex justify-center gap-4 ${index !== 0 ? "mt-4" : ""}`}>
+              <div
+                key={index}
+                className={`flex justify-center gap-4 ${index !== 0 ? "mt-4" : ""}`}
+              >
                 <Image
                   src="/images/Nevbar/Img1.png"
                   alt="Food"
@@ -97,8 +129,12 @@ const Footer = () => {
                   className="w-16 h-16"
                 />
                 <div>
-                  <h3 className="text-[12px] text-[#FFFFFF] font-normal">20 Feb 2022</h3>
-                  <p className="text-[14px] font-normal text-[#FFFFFF]">Keep Your Business</p>
+                  <h3 className="text-[12px] text-[#FFFFFF] font-normal">
+                    20 Feb 2022
+                  </h3>
+                  <p className="text-[14px] font-normal text-[#FFFFFF]">
+                    Keep Your Business
+                  </p>
                 </div>
               </div>
             ))}
@@ -107,21 +143,23 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
-      <div className="w-full mx-auto h-[99px] px-4 py-3 bg-gray2 flex flex-col items-center justify-between md:flex-row">
-        <div className="flex justify-between mx-auto items-center w-[1318px] h-[33px]">
-          <span className="text-sm text-black sm:text-center mb-4 md:mb-0">
-            Copyright © 2022 by Ayeman. All Rights Reserved.
-          </span>
-          <div className="flex justify-center gap-4">
-            {[FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPinterest].map((Icon, index) => (
+      <div className="w-full mx-auto h-auto px-4 py-3 bg-gray2 flex flex-col items-center justify-between md:flex-row">
+        <span className="text-sm text-black sm:text-center mb-4 md:mb-0">
+          Copyright © 2022 by Ayeman. All Rights Reserved.
+        </span>
+
+        {/* Social Media Icons */}
+        <div className="flex justify-center gap-4 md:order-none order-2">
+          {[FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPinterest].map(
+            (Icon, index) => (
               <div
                 key={index}
-                className="bg-secondarycolorwhite w-9 h-9 flex justify-center items-center rounded text-black hover:bg-primarycolororg hover:text-secondarycolorwhite transition-colors"
+                className="bg-secondarycolorwhite w-9 h-9 md:w-9 md:h-9 flex justify-center items-center rounded text-black hover:bg-primarycolororg hover:text-secondarycolorwhite transition-colors"
               >
-                <Icon />
+                <Icon className="md:text-base text-xs" />
               </div>
-            ))}
-          </div>
+            )
+          )}
         </div>
       </div>
     </footer>

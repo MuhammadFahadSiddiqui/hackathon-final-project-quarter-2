@@ -56,5 +56,10 @@ export default {
       title: 'Available',
       description: 'Availability status of the food item',
     },
+    {
+      name: 'countInStock',
+      type: 'number',
+      title: 'Stock',
+    },
   ],
 };
