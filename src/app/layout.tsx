@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "./component/footer";
 import { StoreProvider } from "../redux/StoreProvider"
-import App from "./component/app";
+// import App from "./component/app";
 import Navbar from "./component/navbar";
 import { CartProvider } from "./context/cartProvider";
 
@@ -35,9 +35,8 @@ export default function RootLayout({
       >
         <CartProvider>
         <StoreProvider>
-            <App>
               <Navbar/>
-              {children}</App>
+              {children}
           </StoreProvider>
         <Footer/>
         </CartProvider>
