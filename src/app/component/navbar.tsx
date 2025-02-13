@@ -41,8 +41,12 @@ const Navbar = () => {
         </ul>
         <div className="flex gap-4 text-white text-2xl">
           <GoHeart className="hover:text-primarycolororg cursor-pointer" />
+          <Link href="/cart">
           <IoBagHandleOutline className="hover:text-primarycolororg cursor-pointer" />
+          </Link>
+          <Link href="/signup">
           <AiOutlineUser className="hover:text-primarycolororg cursor-pointer" />
+          </Link>
         </div>
       </div>
 
@@ -55,8 +59,12 @@ const Navbar = () => {
         />
         <div className="flex gap-4 text-white text-2xl mt-4">
           <GoHeart className="hover:text-primarycolororg cursor-pointer" />
+          <Link href="/cart">
           <IoBagHandleOutline className="hover:text-primarycolororg cursor-pointer" />
+          </Link>
+          <Link href="/signup">
           <AiOutlineUser className="hover:text-primarycolororg cursor-pointer" />
+          </Link>
         </div>
       </div>
 

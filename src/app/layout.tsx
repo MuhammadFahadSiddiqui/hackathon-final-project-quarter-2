@@ -5,6 +5,7 @@ import Footer from "./component/footer";
 import { StoreProvider } from "../redux/StoreProvider"
 import App from "./component/app";
 import Navbar from "./component/navbar";
+import { CartProvider } from "./context/cartProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,12 +33,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <CartProvider>
         <StoreProvider>
             <App>
               <Navbar/>
               {children}</App>
           </StoreProvider>
         <Footer/>
+        </CartProvider>
       </body>
     </html>
   );
