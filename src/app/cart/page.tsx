@@ -137,7 +137,6 @@ function CartPage() {
             </ul>
           </div>
         </div>
-        <div className="my-10">{/* <Round /> */}</div>
       </div>
     </div>
   );
