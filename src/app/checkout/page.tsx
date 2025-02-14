@@ -1,116 +1,208 @@
 "use client";
-
-import React from "react";
-import Image from "next/image";
-import { FaArrowRight } from "react-icons/fa";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { useCart } from "../context/cartProvider";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Banner from "../component/banner";
 
-// ✅ Cart item کا صحیح TypeScript type define کریں
+// RootState کی ٹائپ کو شامل کریں
+import { RootState } from "../../redux/store"; // اپنی store فائل کے مطابق ایڈجسٹ کریں
+
+// CartItem کی ساخت بتائیں
 interface CartItem {
-  id: string;
+  id: number;
   name: string;
   price: number;
-  quantity: number;
-  imageUrl: string;
+  qty: number;
 }
 
-function CheckOut() {
-  const { cart, removeFromCart } = useCart() as { cart: CartItem[]; removeFromCart: (id: string) => void };
+export default function Checkout() {
+  // useSelector کو RootState کی ٹائپ کے ساتھ استعمال کریں
+  const { cartItems = [] }: { cartItems: CartItem[] } = useSelector(
+    (state: RootState) => state.cart
+  );
 
-  // 💰 حساب کتاب
-  const subtotal: number = cart.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0);
-  const discount: number = subtotal * 0.25; // 25% discount
-  const tax: number = (subtotal - discount) * 0.1; // 10% tax
-  const total: number = subtotal - discount + tax;
+  // Reduce function میں a اور c کی ٹائپنگ
+  const itemsPrice = cartItems.reduce(
+    (a: number, c: CartItem) => a + c.price * c.qty,
+    0
+  );
+
+  // Shipping address state
+  const [shippingAddress, setShippingAddress] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+    zipCode: "",
+    address1: "",
+    address2: "",
+  });
+
+  const [orderStatus, setOrderStatus] = useState(""); // Order status message for popup
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setShippingAddress({ ...shippingAddress, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Simply show the success message (popup) when button is clicked
+    setOrderStatus("Order placed successfully!");
+  };
 
   return (
     <div>
       <Banner heading="Checkout Page" breadcrumb="Checkout Page" />
-
-      <div className="p-8 my-20">
-        <div className="container mx-auto flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            
-            {/* ✅ Shipping Address Section */}
-            <div className="w-[872px]">
-              <h4 className="text-2xl ml-10 mb-10 font-semibold">Shipping Address</h4>
-
-              <div className="flex gap-4 mb-4">
-                <input type="text" placeholder="First Name" className="w-full border p-2" />
-                <input type="text" placeholder="Last Name" className="w-full border p-2" />
+      <div className="min-h-screen bg-gray-100 p-6">
+        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="p-6 border-b">
+            <h1 className="text-primarycolororg text-2xl font-bold">Shipping Address</h1>
+          </div>
+          <div className="p-6">
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">First name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={shippingAddress.firstName}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Last name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={shippingAddress.lastName}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Email address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={shippingAddress.email}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Phone number</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={shippingAddress.phone}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Country</label>
+                  <select
+                    name="country"
+                    value={shippingAddress.country}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  >
+                    <option>Choose country</option>
+                    <option>Pakistan</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">City</label>
+                  <select
+                    name="city"
+                    value={shippingAddress.city}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  >
+                    <option>Choose city</option>
+                    <option>Karachi</option>
+                    <option>Islamabad</option>
+                    <option>Lahore</option>
+                    <option>Hyderabad</option>
+                    <option>Multan</option>
+                    <option>Faisalabad</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Zip code</label>
+                  <input
+                    type="text"
+                    name="zipCode"
+                    value={shippingAddress.zipCode}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700">Address 1</label>
+                  <input
+                    type="text"
+                    name="address1"
+                    value={shippingAddress.address1}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  />
+                </div>
               </div>
 
-              <div className="flex gap-4 mb-4">
-                <input type="email" placeholder="Email Address" className="w-full border p-2" />
-                <input type="tel" placeholder="Phone Number" className="w-full border p-2" />
-              </div>
+              <button
+                type="submit"
+                className="mt-6 w-full bg-primarycolororg text-white py-3 rounded-md hover:scale-105"
+              >
+                Place an order →
+              </button>
+            </form>
+          </div>
 
-              <div className="flex justify-between mt-8">
-                <button className="flex bg-primarycolororg text-white px-6 py-2 rounded">
-                  <IoIosArrowBack className="mr-4" size={20} /> Back to Cart
-                </button>
-                <button className="flex bg-primarycolororg text-white px-4 py-2 rounded">
-                  Proceed to Shipping <IoIosArrowForward className="ml-4" size={20} />
-                </button>
-              </div>
+          {/* Order Summary with Cart Items */}
+          <div className="p-6 border-t">
+            <h2 className="text-primarycolororg text-xl font-bold mb-4">Order Summary</h2>
+            <div className="space-y-4">
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex justify-between items-center border-b pb-2">
+                  <div>
+                    <h3 className="font-medium">{item.name}</h3>
+                    <p className="text-sm text-gray-500">Quantity: {item.qty}</p>
+                  </div>
+                  <p className="font-medium">${(item.price * item.qty).toFixed(2)}</p>
+                </div>
+              ))}
             </div>
-
-            {/* ✅ Order Summary Section */}
-            <div className="w-[424px] bg-gray-100 p-6 rounded-lg shadow-md">
-              {cart.length === 0 ? (
-                <p className="text-center text-gray-500">Your cart is empty.</p>
-              ) : (
-                <>
-                  {cart.map((item: CartItem) => (
-                    <div key={item.id} className="flex items-center mb-4">
-                      <Image src={item.imageUrl} alt={item.name} width={50} height={50} />
-                      <div className="ml-4">
-                        <h4 className="text-lg font-semibold">{item.name}</h4>
-                        <p>{item.quantity} x ${item.price.toFixed(2)}</p>
-                        <p className="text-gray-600">Total: ${(item.price * item.quantity).toFixed(2)}</p>
-                      </div>
-                      <button onClick={() => removeFromCart(item.id)} className="text-red-500 ml-auto">
-                        ❌
-                      </button>
-                    </div>
-                  ))}
-
-                  <div className="mt-4">
-                    <span className="flex justify-between mb-2">
-                      <p>Subtotal</p>
-                      <p>${subtotal.toFixed(2)}</p>
-                    </span>
-                    <span className="flex justify-between mb-2">
-                      <p>Discount (25%)</p>
-                      <p>-${discount.toFixed(2)}</p>
-                    </span>
-                    <span className="flex justify-between mb-2">
-                      <p>Tax (10%)</p>
-                      <p>${tax.toFixed(2)}</p>
-                    </span>
-                    <hr />
-                    <span className="flex justify-between mt-2 font-semibold">
-                      <p>Total</p>
-                      <p>${total.toFixed(2)}</p>
-                    </span>
-                  </div>
-
-                  <div className="mt-8">
-                    <button className="text-white bg-primarycolororg px-4 py-2 w-full rounded flex items-center justify-between">
-                      <span>Place an Order</span>
-                      <FaArrowRight />
-                    </button>
-                  </div>
-                </>
-              )}
+            <div className="mt-6 space-y-2">
+              <div className="flex justify-between font-bold text-lg">
+                <p>Total</p>
+                <p>${itemsPrice.toFixed(2)}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Popup Message */}
+      {orderStatus && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-md shadow-lg text-center">
+            <p>{orderStatus}</p>
+            <a href="/">
+              <button className="mt-4 bg-primarycolororg text-white py-2 px-6 rounded-md">
+                Close
+              </button>
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-export default CheckOut;

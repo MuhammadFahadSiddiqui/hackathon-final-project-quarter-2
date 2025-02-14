@@ -1,110 +1,119 @@
+// src/app/cart/page.tsx
+
 "use client";
 
-import { addToCart, removeFromCart } from '../../redux/slices/cardSlice';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Image from 'next/image';
-import Link from 'next/link';
-import { AiOutlineDelete } from 'react-icons/ai';
-import { urlFor } from "../../sanity/lib/image";
-import Banner from '../component/banner';
-import { RootState } from '../../redux/store'; // Ensure correct RootState import
+import { addToCart, removeFromCart } from "../../redux/slices/cardSlice";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
+import Link from "next/link";
+import Banner from "../component/banner";
+import { RootState } from "../../redux/type"; // Corrected path to import RootState
 
-// ✅ Define TypeScript Interface for Cart Items
+// Define types for CartItem (if not already defined in types.ts)
 interface CartItem {
   id: string;
   name: string;
   price: number;
   qty: number;
-  image?: string; // Optional field
+  countInStock: number;
+  images?: string[];
 }
 
 function CartPage() {
-  const [loading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  
-  // ✅ Use CartItem[] type for state
-  const { cartItems = [] }: { cartItems: CartItem[] } = useSelector((state: RootState) => state.cart);
 
+  // Safe access to cart state with RootState type
+  const { cartItems = [] } = useSelector((state: RootState) => state.cart);
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
 
-  // ✅ Update Function Types
-  const removeFromCartHandler = (id: string) => dispatch(removeFromCart(id));
+  const removeFromCartHandler = (id: string) => {
+    dispatch(removeFromCart(id));
+  };
 
   const addToCartHandler = (product: CartItem, qty: number) => {
-    if (qty >= 1) {
-      dispatch(addToCart({ ...product, qty }));
-    }
+    dispatch(addToCart({ ...product, qty }));
   };
 
   if (cartItems.length === 0) {
     return (
-      <div className="flex justify-center items-center h-[600px] bg-gray-50 text-center">
+      <div className="flex justify-center items-center h-[400px] bg-gray-50 text-center">
         <div>
           <p className="text-xl font-semibold">Cart is empty.</p>
-          <Link href="/shop" className="text-primarycolororg hover:underline mt-4 block">Go shopping</Link>
+          <Link
+            href="/products"
+            className="text-primarycolororg hover:underline mt-4 block"
+          >
+            Go shopping
+          </Link>
         </div>
       </div>
     );
   }
 
-  // ✅ Correct the function type
-  const getImageUrl = (item: CartItem) => (item.image ? urlFor(item.image)?.url() : "/images/default-product.jpg");
-
   return (
     <div>
       <Banner heading="Shopping Cart" breadcrumb="Shopping Cart" />
-      <div className='max-w-4xl mx-auto'>
+      <div className="max-w-6xl mx-auto sm:my-10 md:my-20">
+        <div className="text-3xl font-bold text-primarycolororg mb-6">
+          Shopping Cart
+        </div>
         <div className="grid md:grid-cols-4 gap-4">
           <div className="md:col-span-3 bg-white shadow-md rounded-lg">
             <table className="min-w-full table-auto">
-              <thead className="bg-white text-primarycolororg">
+              <thead className="bg-orange-100 text-primarycolororg">
                 <tr>
-                  <th className="text-xs md:text-lg md:p-4 py-4 px-1 text-left">Product</th>
-                  <th className="text-xs md:text-lg md:p-4 py-4 px-1 text-right">Quantity</th>
-                  <th className="text-xs md:text-lg md:p-4 py-4 px-1 text-right">Price</th>
-                  <th className="text-xs md:text-lg md:p-4 py-4 px-1">Action</th>
+                  <th className="md:p-4 py-4 px-1 text-left">Product</th>
+                  <th className="md:p-4 py-4 px-1 text-right">Quantity</th>
+                  <th className="md:p-4 py-4 px-1 text-right">Price</th>
+                  <th className="md:p-4 py-4 px-1 ">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {cartItems.map((item) => (
-                  <tr key={item.id} className="border-b hover:bg-yellow-50">
+                  <tr key={item.id} className="border-b hover:bg-teal-50">
                     <td className="md:p-4 py-4 px-1 flex items-center">
-                      <Link href={`/shop/${item.id}`} className="flex items-center space-x-4">
+                      <Link
+                        href={`/products/${item.id}`}
+                        className="flex items-center space-x-4"
+                      >
                         <Image
-                          src={getImageUrl(item)}
-                          alt={item.name || "Product Image"}
-                          width={80}
-                          height={80}
-                          className="p-1 rounded"
+                          src={item.images?.[0] || "/images/default-product.jpg"}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                          className="rounded-md"
                         />
-                        <span className='text-xs md:text-sm'>{item.name}</span>
+                        <span>{item.name}</span>
                       </Link>
                     </td>
-                    <td className="md:p-4 text-right">
-                      <div className="flex items-center p-2 space-x-2 my-2">
-                        <button 
-                          onClick={() => addToCartHandler(item, item.qty - 1)} 
-                          className="bg-gray-200 px-3 text-lg font-bold rounded-full hover:bg-gray-300"
-                          disabled={item.qty <= 1}
-                        >-</button>
-                        <div className="text-sm md:text-lg font-semibold">{item.qty}</div>
-                        <button 
-                          onClick={() => addToCartHandler(item, item.qty + 1)} 
-                          className="bg-gray-200 px-2.5 text-lg font-bold rounded-full hover:bg-gray-300"
-                        >+</button>
-                      </div>
-                    </td>
-                    <td className="text-xs md:text-sm md:p-4 text-right text-primarycolororg">${item.price}</td>
-                    <td className="md:p-4 text-center">
-                      <button 
-                        className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600" 
-                        onClick={() => removeFromCartHandler(item.id)} 
-                        aria-label="Remove Item"
+                    <td className="md:p-4 py-4 px-1 text-right">
+                      <select
+                        value={item.qty}
+                        onChange={(e) =>
+                          addToCartHandler(item, Number(e.target.value))
+                        }
+                        className="border border-primarycolororg rounded px-2 py-1"
                       >
-                        <AiOutlineDelete size={20} />
+                        {/* Updated iteration using Array.from */}
+                        {Array.from({ length: item.countInStock }, (_, index) => (
+                          <option key={index + 1} value={index + 1}>
+                            {index + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td className="md:p-4 py-4 px-1 text-right text-orange-600">
+                      ${item.price}
+                    </td>
+                    <td className="md:p-4 py-4 px-2 text-center">
+                      <button
+                        className="bg-primarycolororg text-white py-1 px-3 md:py-2 md:px-6 rounded hover:scale-105 hover:shadow-md transition duration-200"
+                        onClick={() => removeFromCartHandler(item.id)}
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>
@@ -112,30 +121,23 @@ function CartPage() {
               </tbody>
             </table>
           </div>
-
-          <div className="bg-[#FFF9E5] p-5 shadow-md h-72 rounded-lg">
-            <h2 className="text-2xl font-semibold mb-4 text-center">Cart Totals</h2>
-            <table className="w-full table-auto border-collapse">
-              <tbody>
-                <tr>
-                  <td className="py-3 text-left">Subtotal</td>
-                  <td className="py-3 text-right text-gray-400">({cartItems.reduce((a, c) => a + c.qty, 0)}) : ${itemsPrice}</td>
-                </tr>
-                <tr>
-                  <td className="py-3 text-left font-bold">Total</td>
-                  <td className="py-3 text-right text-lg font-bold text-primarycolororg">${itemsPrice}</td>
-                </tr>
-              </tbody>
-            </table>
-            <button 
-              onClick={(e) => { e.preventDefault(); router.push('/checkout'); }} 
-              className="w-full px-6 py-3 border border-black hover:bg-black hover:text-white rounded-xl"
-              disabled={loading}
-            >
-              {loading ? "Processing..." : "Proceed to checkout"}
-            </button>
+          <div className="bg-white p-5 shadow-md rounded-lg">
+            <ul className="space-y-4">
+              <li className="text-xl font-semibold">
+                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)}) : $ {itemsPrice}
+              </li>
+              <li>
+                <button
+                  onClick={() => router.push("/checkout")}
+                  className="bg-primarycolororg text-white px-6 py-3 w-full rounded-lg hover:scale-105 hover:shadow-md transition duration-200"
+                >
+                  Proceed to checkout
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
+        <div className="my-10">{/* <Round /> */}</div>
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ const initialState = Cookies.get("cart")
         cartItems: [],
         shippingAddress: {},
         paymentMethod: '',
-
         itemsPrice: 0,
         shippingPrice: 0,
         taxPrice: 0,
@@ -33,23 +32,21 @@ const cartSlice = createSlice({
             if (existItem) {
                 // Update quantity or other item details if it already exists
                 state.cartItems = state.cartItems.map((x) =>
-                    x.id === existItem.id ? item : x
+                    x.id === existItem.id ? { ...x, qty: x.qty + item.qty } : x
                 );
             } else {
                 // Add new item to the cart
-                state.cartItems = [...state.cartItems, item];
+                state.cartItems.push(item);
             }
 
             // Recalculate prices
             state.itemsPrice = addDecimals(
                 state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
             );
-            state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 100);
-            state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice));
+            state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 100); // Free shipping above $100
+            state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice)); // Assuming tax is 15%
             state.totalPrice = addDecimals(
-                Number(state.itemsPrice) +
-                Number(state.shippingPrice) +
-                Number(state.taxPrice)
+                Number(state.itemsPrice) + Number(state.shippingPrice) + Number(state.taxPrice)
             );
 
             // Save updated cart state to Cookies
@@ -59,33 +56,31 @@ const cartSlice = createSlice({
             // Remove item by filtering out the item with matching ID
             state.cartItems = state.cartItems.filter((x) => x.id !== action.payload);
 
-            // Recalculate prices
+            // Recalculate prices after removing the item
             state.itemsPrice = addDecimals(
                 state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
             );
             state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 100);
             state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice));
             state.totalPrice = addDecimals(
-                Number(state.itemsPrice) +
-                Number(state.shippingPrice) +
-                Number(state.taxPrice)
+                Number(state.itemsPrice) + Number(state.shippingPrice) + Number(state.taxPrice)
             );
 
             // Save updated cart state to Cookies
             Cookies.set("cart", JSON.stringify(state));
         },
 
-
         saveShippingAddress: (state, action) => {
-            state.shippingAddress = action.payload
-            Cookies.set('cart', JSON.stringify(state))
+            state.shippingAddress = action.payload;
+            // Save updated cart state to Cookies
+            Cookies.set("cart", JSON.stringify(state));
         },
 
         savePaymentMethod: (state, action) => {
-            state.paymentMethod = action.payload
-            Cookies.set('cart', JSON.stringify(state))
+            state.paymentMethod = action.payload;
+            // Save updated cart state to Cookies
+            Cookies.set("cart", JSON.stringify(state));
         },
-
 
         hideLoading: (state) => {
             // Toggle loading state to false
