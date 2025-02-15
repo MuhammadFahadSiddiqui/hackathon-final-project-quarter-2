@@ -29,7 +29,7 @@ export default async function ProductsPage() {
       {/* Centered & Responsive Container */}
       <div className="container mx-auto p-10">
         {/* Responsive Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {products.map((product) => (
             <div 
               key={product._id} 
